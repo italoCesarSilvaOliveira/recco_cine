@@ -42,7 +42,7 @@ export function Splash({ onComplete }: Props) {
 
   return (
     <Video
-      source={require("../assets/splash.mp4")}
+      source={require("../assets/videos/splash.mp4")}
       style={StyleSheet.absoluteFill} // Video ocupa toda tela
       resizeMode={ResizeMode.COVER}
       isLooping={false} // Não repetir o video

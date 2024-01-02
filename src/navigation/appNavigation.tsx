@@ -21,7 +21,7 @@ export default function appNavigation() {
           <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
         ) : (
           <Stack.Screen name="Splash" options={{headerShown: false}}>
-            {(props) => <Splash {...props} onComplete={setSplashComplete} />}
+            {(props) => <Splash {...  props} onComplete={setSplashComplete} />}
           </Stack.Screen>
         )}
       </Stack.Navigator>
