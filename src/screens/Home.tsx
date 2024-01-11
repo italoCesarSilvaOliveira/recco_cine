@@ -32,7 +32,7 @@ export function Home() {
       <Title> Bem Vindo! </Title>
       <Lottie>
         <LottieView
-          source={require("../assets/animations/Welcome.json")}
+          source={require("../../assets/animations/Welcome.json")}
           autoPlay
           loop
         />
