@@ -1,7 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home } from "../screens/Home";
-import { Splash } from "../screens/Splash";
+import { Home } from "../screens/Home/Home";
+import { Main } from "../screens/Main/Main";
+import { Splash } from "../screens/Splash/Splash";
 import React, { useState } from "react";
 import { preventAutoHideAsync } from "expo-splash-screen";
 
@@ -18,10 +19,17 @@ export default function appNavigation() {
     <NavigationContainer>
       <Stack.Navigator>
         {splashComplete ? (
-          <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
+          </>
         ) : (
-          <Stack.Screen name="Splash" options={{headerShown: false}}>
-            {(props) => <Splash {...  props} onComplete={setSplashComplete} />}
+          <Stack.Screen name="Splash" options={{ headerShown: false }}>
+            {(props) => <Splash {...props} onComplete={setSplashComplete} />}
           </Stack.Screen>
         )}
       </Stack.Navigator>
