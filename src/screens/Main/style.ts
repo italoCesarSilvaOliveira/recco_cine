@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex: 1;
   background-color: #151f42;
   align-items: center;
+  gap: 10px;
 `;
 
 export const Lottie = styled.View`
@@ -24,5 +25,46 @@ export const Title = styled.Text`
 `;
 
 export const DropDownInput = styled.View`
-  
+  margin-top: 10px;
+`;
+
+export const InputComponent = styled.View`
+  display: flex;
+  /* background-color: azure; */
+  width: 300px;
+  height: 120px;
+  margin-top: -33px;
+  flex-direction: row;
+  background-color: black;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+`
+
+
+export const Label = styled.Text`
+  background-color: white;
+  height: 20px;
+  left: 55px;
+  z-index: 999;
+`;
+
+export const InputText = styled.TextInput`
+  background-color: blue;
+  height: 50px;
+  width: 200px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextButton = styled.Text`
+  background-color: orange;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
 `;

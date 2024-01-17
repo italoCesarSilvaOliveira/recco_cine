@@ -1,6 +1,17 @@
-import { View, Text, TextInput } from "react-native";
-import { Container, Lottie, Title, DropDownInput } from "../Main/style";
+import { DoubleDropdownComponent } from "../../components/DropdownComponent";
+import { useState } from "react";
 import LottieView from "lottie-react-native";
+import {
+  Container,
+  Lottie,
+  Title,
+  DropDownInput,
+  InputText,
+  Label,
+  InputComponent,
+  Button,
+  TextButton,
+} from "../Main/style";
 
 import {
   useFonts,
@@ -8,9 +19,9 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import { useState } from "react";
 
 export function Main() {
+  const [idade, setIdade] = useState<string>("");
   const [fontLoaded] = useFonts({
     Poppins_300Light,
     Poppins_400Regular,
@@ -20,9 +31,6 @@ export function Main() {
   if (!fontLoaded) {
     return null;
   }
-
-  const dataMembers = ["Aluno", "Servidor"];
-
   return (
     <Container>
       <Lottie>
@@ -34,13 +42,19 @@ export function Main() {
       </Lottie>
       <Title> Insira algumas informações antes de começar: </Title>
       <DropDownInput>
-
+        <DoubleDropdownComponent />
       </DropDownInput>
-
-      {/* Um espaço que irá depender do resultado escolhido na opção anterior */}
-      {/* No caso de Aluno: Inserir o Curso */}
-      {/* No caso de Servidor: Inserir o Setor */}
-      {/* E nos dois casos inserir a idade */}
+      <InputComponent>
+        <Label> Idade: </Label>
+        <InputText
+          value={idade}
+          onChangeText={setIdade}
+          keyboardType="numeric"
+        />
+        <Button>
+          <TextButton> {"Avançar >"}</TextButton>
+        </Button>
+      </InputComponent>
     </Container>
   );
 }

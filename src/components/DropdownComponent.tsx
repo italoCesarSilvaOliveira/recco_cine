@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { ViewMain, DiviseView } from "../components/style";
 
 interface Item {
   label: string;
@@ -8,92 +9,134 @@ interface Item {
 }
 
 const data = [
-  { label: "Item 1", value: "1" },
-  { label: "Item 2", value: "2" },
-  { label: "Item 3", value: "3" },
-  { label: "Item 4", value: "4" },
-  { label: "Item 5", value: "5" },
-  { label: "Item 6", value: "6" },
-  { label: "Item 7", value: "7" },
-  { label: "Item 8", value: "8" },
+  { label: "Aluno", value: "1" },
+  { label: "Servidor", value: "2" },
 ];
 
-export function DropdownComponent() {
-  const [value, setValue] = useState<string | null>(null);
-  const [isFocus, setIsFocus] = useState(false);
+const optionsByValue: { [key: string]: Item[] } = {
+  "1": [
+    { label: "Engenharia de Alimentos", value: "G1" },
+    { label: "Sistemas de Informação", value: "G2" },
+    { label: "Agroindustria", value: "G3" },
+    { label: "Agropecuária", value: "G4" },
+    { label: "Física", value: "G5" },
+    { label: "Matematica", value: "G6" },
+    { label: "Administração", value: "G7" },
+    { label: "Probabilidade e Estatistica", value: "G8" },
+  ],
+  "2": [
+    { label: "Administrador", value: "S1" },
+    { label: "Estágiario", value: "S2" },
+    { label: "Professor", value: "S3" },
+    { label: "Secretário", value: "S4" },
+    { label: "Diretor", value: "S5" },
+  ],
+};
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: "blue" }]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
-  };
+export function DoubleDropdownComponent() {
+  const [roleValue, setRoleValue] = useState<string | null>(null);
+  const [subRoleValue, setSubRoleValue] = useState<string | null>(null);
+  const [isRoleFocus, setIsRoleFocus] = useState(false);
+  const [isSubRoleFocus, setIsSubRoleFocus] = useState(false);
 
   return (
-    <View style={styles.container}>
-      {renderLabel()}
-      <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: "blue" }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        data={data}
-        search
-        maxHeight={300}
-        labelField="label"
-        valueField="value"
-        placeholder={!isFocus ? "Select item" : "..."}
-        searchPlaceholder="Search..."
-        value={value}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={(item: Item) => {
-          setValue(item.value);
-          setIsFocus(false);
-        }}
-      />
-    </View>
+    <ViewMain>
+      <DiviseView>
+        <Text style={[styles.labelRole, isRoleFocus && { color: "#FFFFFF" }]}>
+          Função
+        </Text>
+        <Dropdown
+          style={[styles.dropdown, isRoleFocus && { borderColor: "White" }]}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          data={data}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={"Selecione Uma Opção"}
+          searchPlaceholder="Procurar ..."
+          value={roleValue}
+          onFocus={() => setIsRoleFocus(true)}
+          onBlur={() => setIsRoleFocus(false)}
+          onChange={(item: Item) => {
+            setRoleValue(item.value);
+            setSubRoleValue(null);
+            setIsRoleFocus(false);
+          }}
+        />
+      </DiviseView>
+
+      <DiviseView>
+        <Text
+          style={[styles.labelSubRole, isSubRoleFocus && { color: "#FFFFFF" }]}
+        >
+          Opção
+        </Text>
+        <Dropdown
+          style={[styles.dropdown, isSubRoleFocus && { borderColor: "White" }]}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          data={optionsByValue[roleValue || ""] || []}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          search
+          placeholder={"Selecione Uma Opção"}
+          searchPlaceholder="Procurar ..."
+          value={subRoleValue}
+          onFocus={() => setIsSubRoleFocus(true)}
+          onBlur={() => setIsSubRoleFocus(false)}
+          onChange={(item: Item) => {
+            setSubRoleValue(item.value);
+            setIsSubRoleFocus(false);
+          }}
+        />
+      </DiviseView>
+    </ViewMain>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    padding: 16,
-  },
   dropdown: {
     height: 50,
-    borderColor: "gray",
+    width: 300,
+    borderColor: "white",
     borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
+    marginBottom: 16,
   },
-  icon: {
-    marginRight: 5,
-  },
-  label: {
+  labelRole: {
     position: "absolute",
-    backgroundColor: "white",
-    left: 22,
-    top: 8,
+    backgroundColor: "#151f42",
+    left: 10,
+    top: -10,
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
+    color: "#FFFFFF",
+  },
+  labelSubRole: {
+    position: "absolute",
+    backgroundColor: "#151f42",
+    left: 10,
+    top: -10,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    color: "#FFFFFF",
   },
   placeholderStyle: {
     fontSize: 16,
+    color: "#FFFFFF",
+    marginLeft: 10
   },
   selectedTextStyle: {
     fontSize: 16,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
+    color: "#FFFFFF",
+    marginLeft: 10,
   },
   inputSearchStyle: {
     height: 40,
