@@ -1,5 +1,5 @@
 import { DoubleDropdownComponent } from "../../components/DropdownComponent";
-import { useState } from "react";
+import React, { useState } from "react";
 import LottieView from "lottie-react-native";
 import {
   Container,
@@ -11,6 +11,7 @@ import {
   InputComponent,
   Button,
   TextButton,
+  InputTextComponent,
 } from "../Main/style";
 
 import {
@@ -45,14 +46,16 @@ export function Main() {
         <DoubleDropdownComponent />
       </DropDownInput>
       <InputComponent>
-        <Label> Idade: </Label>
-        <InputText
-          value={idade}
-          onChangeText={setIdade}
-          keyboardType="numeric"
-        />
+        <InputTextComponent>
+          <Label> Idade </Label>
+          <InputText
+            value={idade}
+            onChangeText={setIdade}
+            keyboardType="numeric"
+          />
+        </InputTextComponent>
         <Button>
-          <TextButton> {"Avançar >"}</TextButton>
+          <TextButton> Avançar </TextButton>
         </Button>
       </InputComponent>
     </Container>
