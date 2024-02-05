@@ -1,6 +1,7 @@
 import { DoubleDropdownComponent } from "../../components/DropdownComponent";
 import React, { useState } from "react";
 import LottieView from "lottie-react-native";
+
 import {
   Container,
   Lottie,
@@ -21,7 +22,11 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 
-export function Main() {
+type MainScreenProps = {
+  navigation: any;
+}
+
+export function Main({navigation}: MainScreenProps) {
   const [idade, setIdade] = useState<string>("");
   const [fontLoaded] = useFonts({
     Poppins_300Light,
@@ -54,10 +59,11 @@ export function Main() {
             keyboardType="numeric"
           />
         </InputTextComponent>
-        <Button>
+        <Button onPress={() => {navigation.push('Question01')}}>
           <TextButton> Avançar </TextButton>
         </Button>
       </InputComponent>
     </Container>
   );
 }
+
